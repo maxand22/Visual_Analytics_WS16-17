@@ -4,12 +4,12 @@ from data_store import DataStore
 class Table(DataStore):
 
 
-	def __init__(self, filename, isBase):
+	def __init__(self, data, isBase):
 
 		if isBase:
-			self.df = pandas.read_csv(filename,sep =';', header = 0)
+			self.df = pandas.read_csv(data,sep =';', header = 0)
 		else:
-			pass
+			self.df = data
 			#TODO
 
 		#pass data_count to parent
