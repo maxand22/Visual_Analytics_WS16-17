@@ -4,9 +4,9 @@ from data_store import DataStore
 class Table(DataStore):
 
 
-	def __init__(self, data, isBase):
+	def __init__(self, data, readFile):
 
-		if isBase:
+		if readFile:
 			dtypes = {'MasterTime': 'str', 'Small': 'float', 'Large': 'float', 'OutdoorTemp': 'float', 'RelHumidity': 'float'}
 			parse_dates = ['MasterTime']
 			self.df = pandas.read_csv(data,sep =';', header = 0, dtype=dtypes, parse_dates=parse_dates)
