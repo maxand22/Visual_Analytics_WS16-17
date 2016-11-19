@@ -7,7 +7,9 @@ class Table(DataStore):
 	def __init__(self, data, isBase):
 
 		if isBase:
-			self.df = pandas.read_csv(data,sep =';', header = 0)
+			dtypes = {'MasterTime': 'str', 'Small': 'float', 'Large': 'float', 'OutdoorTemp': 'float', 'RelHumidity': 'float'}
+			parse_dates = ['MasterTime']
+			self.df = pandas.read_csv(data,sep =';', header = 0, dtype=dtypes, parse_dates=parse_dates)
 		else:
 			self.df = data
 			#TODO
