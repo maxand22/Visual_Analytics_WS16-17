@@ -1,7 +1,6 @@
 import pandas
 #from data_store import DataStore
 
-#class Table(DataStore):
 class Table():
 
 	# Constructor for Table
@@ -21,10 +20,6 @@ class Table():
 		else:
 			# else: data is loaded from dataframe
 			self.df = data
-
-		#pass data_count to parent
-		#TODO: data_itr?!
-		#DataStore.__init__(self, len(self.df.axes[0]), None)
 
 		# store amount of data, number of columns & names
 		self.data_count = len(self.df.axes[0])
