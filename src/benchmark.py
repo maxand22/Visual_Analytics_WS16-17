@@ -102,7 +102,7 @@ def profile(testcases, force_new_file = False):
 	print 'Read time:', (endtime - starttime).total_seconds()
 
 	# Pass testdata to computing function
-	calculateComputingTimes(ds,'selection')
+	#calculateComputingTimes(ds,'selection')
 	calculateComputingTimes(ds,'projection')
 	calculateComputingTimes(ds,'aggregation')
 
@@ -112,6 +112,6 @@ profile(10000, force_new_file = False)
 profile(100000, force_new_file = False)
 profile(1000000, force_new_file = False) 
 profile(10000000, force_new_file = False)
-profile(100000000, force_new_file = False)
+#profile(100000000, force_new_file = False)
 
 

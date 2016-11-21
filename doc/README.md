@@ -15,3 +15,7 @@ eigene Leistung:
 - tables.py
 - data_source.py
 - benchmark.py
+- createOutputForScreenshots.py
+
+Ausführung:
+- script.sh aus dem prototype Ordner ausführen
