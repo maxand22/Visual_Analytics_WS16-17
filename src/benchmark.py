@@ -108,9 +108,9 @@ def profile(testcases, force_new_file = False):
 
 	#print '###### Finish', testcases
 
-#profile(10000, force_new_file = False)
-#profile(100000, force_new_file = False)
-#profile(1000000, force_new_file = False) 
+profile(10000, force_new_file = False)
+profile(100000, force_new_file = False)
+profile(1000000, force_new_file = False) 
 profile(10000000, force_new_file = False)
 profile(100000000, force_new_file = False)
 
