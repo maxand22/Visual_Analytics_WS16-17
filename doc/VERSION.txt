@@ -1,0 +1,21 @@
+Version
+
+#12/11/3016
+- Creation of folder structure and empty files
+- Creation of DataSource, DataStore & Table with init function
+- First draft of readData function
+
+
+#13/11/2016
+- Finishing Tables Class
+- Determining DataStore is not needed in our program
+- Finished ReadData
+
+#19/11/2016
+- Writing Selection, Aggregation & Projection
+- Adding delete functions in DataSource & deletion logic in readData
+
+#20/11/2016
+- Writing benchmark file
+- Writing createOutputForScreenshots file
+- do 6.

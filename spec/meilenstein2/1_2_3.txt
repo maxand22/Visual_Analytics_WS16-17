@@ -1,0 +1,68 @@
+1.-3.
+- Klasse Table speichert die Daten
+- Verwendete Datenstruktur: pandas Dataframe
+
+- Klasse DataSource managet den Hauptdatensatz sowie sämtliche Zwischenresultate
+
+PseudoCode:
+
+
+- init(data_source.py l.8ff.)
+	- keine zwischenresulate (l.9 & 12)
+	- keine base_data (l.14)
+
+- readData (data_source.py l.17ff.)
+  - Instanz Table wird erstellt mit den Daten (l.23)
+  - wenn variable base_data noch leer ist
+  	- eingelesenen Daten sind die neuen base_data (l.28)
+  - ansonsten:
+  	- speicherung der daten in einer liste für Zwischenresultate (l.31)
+  	- falls bereits mehr als 50 tabellen bestehen:
+  		- lösche die älteste (l.38)
+
+- deleteTable(data_source.py l.45ff.)
+	- wenn eine berechnete Tabelle existiert:
+		- lösche sie (l.48)
+
+- deleteBaseDate(data_source.py l.51ff.)
+	- lösche base_data
+
+- selection(data_source.py l.56ff.)
+	- wenn keine Daten expliziert mitgegeben werden:
+		- nutze base_data (l.61)
+		- logik wurde so gewählt, damit auch selection auf Zwischenresultate angewendet werden kann
+	- identifikation der gewünschten operation (l.64ff.)
+		- same: daten, bei denen das attribut der const1 entspricht
+		- at_least: daten, bei denen das attribut größer oder gleich der const1 ist
+		- same: daten, bei denen das attribut kleiner oder gleich const1 ist
+		- same: daten, bei denen das attribut zwischen const1 und const 2 liegt
+	- Resultat wird nur als zwischenresultat gespeichert, wenn gewünscht (l.82)
+
+- projection(data_source.py l.86ff.)
+	- wenn keine Daten expliziert mitgegeben werden:
+		- nutze base_data (l.91)
+		- logik wurde so gewählt, damit auch projection auf Zwischenresultate angewendet werden kann
+	- limitierung auf 2 ausgewählte spalten (l.94)
+	- speichere resultat (l.97)
+
+- aggregation(data_source.py l.101ff.)
+	- wenn keine Daten expliziert mitgegeben werden:
+		- nutze base_data (l.105)
+		- logik wurde so gewählt, damit auch projection auf Zwischenresultate angewendet werden kann
+	- falls eine range spezifiziert wurde:
+		- nutze selection mit den rangedaten (l.110)
+	- identifikation der gewünschten aggregation (l.115ff.)
+		- min: minimum der spalten
+		- max: maximum der spalten
+		- avg: durchschnitt der spalten
+	- speichere resultat (l.126)
+
+- init(table.py l.7ff.)
+	- wenn von der festplatte gelesen wird (l.9)
+  		- definition der datentypen (l.13, 17) und einlesen in ein dataframe(l.18)
+  	- ansonsten: 
+  		- berechnetes Ergebnis in form eines dataframes
+  		- keine einlesen notwendig und daher übernahme (l.21)
+  	- Speicherung der Anzahl der Einträge, Spalten und deren Namen (ll.24-27)
+
+

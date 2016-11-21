@@ -11,11 +11,10 @@ class Table():
 			# define type of columns
 			# Small & Large need to be float since python int cannot handle NAs
 			dtypes = {'MasterTime': 'str', 'Small': 'float', 'Large': 'float', 'OutdoorTemp': 'float', 'RelHumidity': 'float'}
-
-			parse_dates = ['MasterTime']
-
+			
 			# read_csv cannot directly parse datetimes
 			# therefore needs to be specified
+			parse_dates = ['MasterTime']
 			self.df = pandas.read_csv(data,sep =';', header = 0, dtype=dtypes, parse_dates=parse_dates)
 		else:
 			# else: data is loaded from dataframe

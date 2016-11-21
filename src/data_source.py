@@ -1,6 +1,6 @@
 import pandas
 
-from tables import Table
+from table import Table
 
 class DataSource:
 
@@ -21,20 +21,37 @@ class DataSource:
 		self.done = False
 		# Push data to class Table
 		data = Table(data, is_file_on_disk)
-		# Increase table count
-		self.table_count+=1
-
-		# if base data is None, it means we are reading for the first time
+		
+		# if base data is None, it means we are reading for the first time or the base data was deleted before
 		if self.base_data is None:
 			# Therefore, first data is set to be the base
 			self.base_data = data
 		else:
 			# else: calculated data
 			self.tables.append(data)
+			# Increase table count 
+			self.table_count+= 1
+			
+			# If we exceed the amount of 50 result tables we delete the first one
+			if self.table_count > 50:
+				#delete the first one
+				self.deleteTable(0)
+				self.table_count -= 1 
 
 		# Reading data is done
 		self.done = True
 		return data
+
+	def deleteTable(self, position):
+		# Delete table which origined from a operation of base data
+		if self.table_count > 0:
+			self.tables.pop(position)
+			self.table_count -= 1
+
+	def deleteBaseData(self):
+		# Delete base data
+		self.base_data = None
+
 		
 	def selection(self, attribute_name, operator, const1, const2 = None, write_table = True, data = None):
 		# Filter data on row basis
