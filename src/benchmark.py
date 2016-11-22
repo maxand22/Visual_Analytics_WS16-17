@@ -67,15 +67,77 @@ def calculateComputingTimes(ds, test_type):
 	running_times = []
 	for  i in range(10):
 		# Specified 10 testruns for each dataset & function
-		starttime = datetime.datetime.now()
+		
 		
 		if test_type == 'selection':
 			#Testing selection
-			ds.selection('Small', 'span', 0,10000)
+
+			#choosing random attribute
+			testing_attribute_num = randint(0, ds.base_data.attribute_count-1)
+			testing_attribute = ds.base_data.attribute_names [testing_attribute_num]
+
+			if testing_attribute_num == 0:
+				minimum_value = randomDate(datetime.datetime(2010, 01, 01, 0,0,0),datetime.datetime(2016, 12, 31, 0,0,0))
+				maximum_value = randomDate(minimum_value,datetime.datetime(2016, 12, 31, 0,0,0))
+			elif testing_attribute_num < 3:
+				minimum_value = randint(0,100000)
+				maximum_value = randint(minimum_value,100000)
+			else:
+				minimum_value = uniform(0.0, 100.0)
+				maximum_value = uniform(minimum_value, 100.0)
+
+			# choosing random type of selection
+			testing_operation_num = randint(0,3)
+			if testing_operation_num == 0:
+				testing_operation = 'same'
+			elif testing_operation_num == 1:
+				testing_operation = 'at_least'
+			elif testing_operation_num == 2:
+				testing_operation = 'less_than'				
+			elif testing_operation_num == 3:
+				testing_operation = 'span'
+
+			starttime = datetime.datetime.now()
+			ds.selection(testing_attribute, testing_operation, minimum_value,maximum_value)
 		elif test_type =='projection':
-			ds.projection('Small', 'Large')
+			# Testing projection 
+
+			# Choosing two random attribute
+			testing_attribute_num1 = randint(0, ds.base_data.attribute_count-1)
+			testing_attribute_num2 = randint(0, ds.base_data.attribute_count-1)
+
+			# Making sure the numbers differ
+			while testing_attribute_num1 == testing_attribute_num2:
+				testing_attribute_num2 = randint(0, ds.base_data.attribute_count-1)
+				
+			starttime = datetime.datetime.now()
+			ds.projection(ds.base_data.attribute_names[testing_attribute_num1], ds.base_data.attribute_names[testing_attribute_num2])
 		elif test_type == 'aggregation':
-			ds.aggregation('max', ['OutdoorTemp', 'RelHumidity'], datetime.datetime(2014, 01, 01, 0,0,0), datetime.datetime(2015, 01, 01, 0,0,0) )
+			# Testing aggregation
+
+			# choosing random type of aggregation
+			testing_operation_num = randint(0,2)
+			if testing_operation_num == 0:
+				testing_operation = 'max'
+			elif testing_operation_num == 1:
+				testing_operation = 'min'
+			elif testing_operation_num == 2:
+				testing_operation = 'avg'	
+
+			# Choosing two random attribute
+			testing_attribute_num1 = randint(0, ds.base_data.attribute_count-1)
+			testing_attribute_num2 = randint(0, ds.base_data.attribute_count-1)
+
+			# Making sure the numbers differ
+			while testing_attribute_num1 == testing_attribute_num2:
+				testing_attribute_num2 = randint(0, ds.base_data.attribute_count-1)		
+
+			# Choosing time span
+			minimum_value = randomDate(datetime.datetime(2010, 01, 01, 0,0,0),datetime.datetime(2016, 12, 31, 0,0,0))
+			maximum_value = randomDate(minimum_value,datetime.datetime(2016, 12, 31, 0,0,0))						
+
+			starttime = datetime.datetime.now()
+			ds.aggregation(testing_operation, [testing_attribute_num1, testing_attribute_num2], minimum_value, maximum_value)
 
 		endtime = datetime.datetime.now()
 
@@ -102,7 +164,7 @@ def profile(testcases, force_new_file = False):
 	print 'Read time:', (endtime - starttime).total_seconds()
 
 	# Pass testdata to computing function
-	#calculateComputingTimes(ds,'selection')
+	calculateComputingTimes(ds,'selection')
 	calculateComputingTimes(ds,'projection')
 	calculateComputingTimes(ds,'aggregation')
 
@@ -111,7 +173,7 @@ def profile(testcases, force_new_file = False):
 profile(10000, force_new_file = False)
 profile(100000, force_new_file = False)
 profile(1000000, force_new_file = False) 
-profile(10000000, force_new_file = False)
+#profile(10000000, force_new_file = False)
 #profile(100000000, force_new_file = False)
 
 
