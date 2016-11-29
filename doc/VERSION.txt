@@ -19,3 +19,6 @@ Version
 - Writing benchmark file
 - Writing createOutputForScreenshots file
 - do 6.
+
+#22/11/2016
+- Added random tests in benchmark.py

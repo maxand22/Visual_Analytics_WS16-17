@@ -109,7 +109,7 @@ def calculateComputingTimes(ds, test_type):
 			# Making sure the numbers differ
 			while testing_attribute_num1 == testing_attribute_num2:
 				testing_attribute_num2 = randint(0, ds.base_data.attribute_count-1)
-				
+
 			starttime = datetime.datetime.now()
 			ds.projection(ds.base_data.attribute_names[testing_attribute_num1], ds.base_data.attribute_names[testing_attribute_num2])
 		elif test_type == 'aggregation':
@@ -173,7 +173,7 @@ def profile(testcases, force_new_file = False):
 profile(10000, force_new_file = False)
 profile(100000, force_new_file = False)
 profile(1000000, force_new_file = False) 
-#profile(10000000, force_new_file = False)
-#profile(100000000, force_new_file = False)
+profile(10000000, force_new_file = False)
+profile(100000000, force_new_file = False)
 
 

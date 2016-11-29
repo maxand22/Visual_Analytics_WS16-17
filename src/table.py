@@ -4,9 +4,9 @@ import pandas
 class Table():
 
 	# Constructor for Table
-	def __init__(self, data, isFileOnDisk):
+	def __init__(self, data, is_file_on_disc):
 
-		if isFileOnDisk:
+		if is_file_on_disc:
 			# if: data is loaded from file from disc
 			# define type of columns
 			# Small & Large need to be float since python int cannot handle NAs
