@@ -11,6 +11,11 @@ externe Bibliotheken:
 - os
 - csv
 
+- sip 4.18.1
+- qt 4.8.7_2
+http://stackoverflow.com/questions/36615952/how-can-i-install-pyqt4-for-python-2-7
+
+
 eigene Leistung:
 - tables.py
 - data_source.py

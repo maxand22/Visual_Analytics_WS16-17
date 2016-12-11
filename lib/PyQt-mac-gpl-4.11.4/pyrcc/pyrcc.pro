@@ -1,0 +1,13 @@
+TARGET = pyrcc4
+TEMPLATE = app
+QT -= gui
+QT += xml
+CONFIG += warn_on release
+CONFIG -= app_bundle
+CONFIG -= android_install
+target.path = /Library/Frameworks/Python.framework/Versions/2.7/bin
+INSTALLS += target
+INCLUDEPATH += /Users/behdad/Documents/Visual_Analytics_WS16-17/lib/PyQt-mac-gpl-4.11.4/pyrcc
+VPATH = /Users/behdad/Documents/Visual_Analytics_WS16-17/lib/PyQt-mac-gpl-4.11.4/pyrcc
+HEADERS = rcc.h
+SOURCES = main.cpp rcc.cpp

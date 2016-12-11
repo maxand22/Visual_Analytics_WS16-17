@@ -183,6 +183,6 @@ def profile(testcases, force_new_file = False):
 #profile(10000000, force_new_file = False)
 #profile(100000000, force_new_file = False)
 
-createTestCsv(10000000);
+createTestCsv(100);
 
 
