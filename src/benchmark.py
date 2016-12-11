@@ -46,6 +46,9 @@ def createTestCsv(testcases):
 	except OSError:
 		pass
 	
+
+	starttime = datetime.datetime.now()
+
 	# Prepare CSV writer
 	writer_prep = open('data/' + str(testcases) + '.csv', 'a')
 	writer = csv.writer(writer_prep,delimiter =';')
@@ -61,6 +64,10 @@ def createTestCsv(testcases):
 		outdoor_temp = uniform(-50., 100.0)
 		# Write random values to CSV
 		writer.writerow([master_time,small,large, rel_humidity, outdoor_temp])   
+
+	endtime = datetime.datetime.now()
+	# Print Reading Time
+	print 'Data Generation time:', (endtime - starttime).total_seconds()
 
 def calculateComputingTimes(ds, test_type):
 	# Function to calculate computation times of testset for selection, projection & aggregation
@@ -170,10 +177,12 @@ def profile(testcases, force_new_file = False):
 
 	#print '###### Finish', testcases
 
-profile(10000, force_new_file = False)
-profile(100000, force_new_file = False)
-profile(1000000, force_new_file = False) 
-profile(10000000, force_new_file = False)
-profile(100000000, force_new_file = False)
+#profile(10000, force_new_file = False)
+#profile(100000, force_new_file = False)
+#profile(1000000, force_new_file = False) 
+#profile(10000000, force_new_file = False)
+#profile(100000000, force_new_file = False)
+
+createTestCsv(10000000);
 
 
