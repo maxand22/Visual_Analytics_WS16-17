@@ -36,7 +36,7 @@ TOOLS="hover,pan,wheel_zoom,zoom_in,zoom_out,box_zoom,undo,redo,reset,tap,save,b
 current = None
 previous = None
 
-
+notFirst = False
 
 
 # create a callback that will add a number in a random location
@@ -46,7 +46,9 @@ def chooseVariables(ticked):
     global p
     global current
     global previous
+    global notFirst
     print ticked
+
 
     previous = current
     current = ticked
@@ -60,7 +62,10 @@ def chooseVariables(ticked):
 
 
     if len(checkbox_button_group.active) == 2:
-        curdoc().get_model_by_name('plot2')
+        if notFirst:
+            curdoc().get_model_by_name('abc').remove()
+
+        notFirst = True
         if current[0] == 0 or current[1] == 0:
             p = figure(tools=TOOLS, x_axis_type="datetime", name = "abc")
         else:
