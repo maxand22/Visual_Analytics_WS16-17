@@ -1,0 +1,64 @@
+
+#Bokeh has several "ticker" models that determine the location of ticks. By default the appropirate ticker type is choosen automatically by bokeh.plotting and bokeh.charts.
+
+Due to we have most of the time continous variables, bokeh displays the range (min and max) by 6 major ticks by 5 minor ticks on a base of 10.
+
+
+Pseudo-Code:
+
+find_range (xaxis, yaxis{
+  
+  maxx = max(xaxis)
+  minx = min(xaxis)
+
+  maxy = max(yaxis)
+  miny = min(yaxis)
+
+  rangez = [maxx, minx, maxy, miny]
+
+  return rangez
+}
+
+type_of_x = xaxis.dtype
+type_of_y = yaxis.dtype
+
+if type == continous
+  BasicTickFormatter
+
+if type == categorical
+  CategoricalTickFormater
+
+if type == Datetime
+  DatetimeTickFormatter
+
+if type == log
+  LogTickFormatter
+
+
+AdaptiveTicker(**kwargs)
+{
+  "base": 10.0,
+  "desired_num_ticks": 6,
+  "id": "4cc7d33d-2e64-4ea4-a08d-089931f079bc",
+  "mantissas": [
+    1,
+    2,
+    5
+  ],
+  "max_interval": null,
+  "min_interval": 0.0,
+  "name": null,
+  "num_minor_ticks": 5,
+  "tags": []
+}
+
+Explenation of Pseudo-Code:
+
+Bokeh.chars creates the grid by method make_grid (dimension, ticker) and returns an object of class Grid. This class uses the bokeh.models.tickers to generate the ticker depending on type of the range of the variables which has to be displayed. The range is equal to the max as well as the min value of the displayed variable (by default at the beginning: the max and min value of the column chossen).
+
+The tick label algorithm formats automatically depending on an axis data type by four default formatter:
+
+BasicTickFormatter (Continous variable) — Default formatter for linear axes.
+CategoricalTickFormatter — Default formatter for categorical axes.
+DatetimeTickFormatter — Default formatter for datetime axes.
+LogTickFormatter — Default formatter for log axes
