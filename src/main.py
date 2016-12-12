@@ -163,7 +163,7 @@ def on_selection_change(attr, old, new):
     selection =  dss.to_df()
     
     if new['1d']['indices'] == []:
-        pass
+        dss2.selected['1d'] = new['1d']
     else:
         #selection = selection[selection.index.isin(new['1d']['indices'])]
         helper = pd.DataFrame(dss.data['z'])
@@ -192,8 +192,6 @@ def on_selection_change(attr, old, new):
 
     div.text = "Count: " + str(len(selection)) + "<br>" + "X-Min: " + str(min1) + "<br>" + "X-Max: " + str(max1) + "<br>" + "Y-Min: " + str(min2) + "<br>" + "Y-Max: " + str(max2) 
 
-def on_selection_change2(attr, old, new):
-    print new
 
 # Create new DataSource
 ds = DataSource()
@@ -264,8 +262,6 @@ button_next = Button(label="Next", button_type="success")
 button_next.on_click(go_forward)
 
 
-
-dss2.on_change('selected', on_selection_change2)
 dss.on_change('selected', on_selection_change)
 
 
