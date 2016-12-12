@@ -1,5 +1,6 @@
 from data_source import DataSource
 import datetime
+import sys
 
 # Create new DataSource
 ds = DataSource()
@@ -17,6 +18,9 @@ print '#Columns:', ds.base_data.attribute_count
 print 'Column Names:', ds.base_data.attribute_names
 # Print top 10 rows
 print ds.base_data.df.head(10)
+
+
+
 
 # Execute Selection
 ds.selection('Small', 'span', 0,10000)
@@ -45,7 +49,7 @@ print 'Column Names:', ds.tables[1].attribute_names
 # Print top 10 rows
 print ds.tables[1].df.head(10)
 
-ds.aggregation('max', ['OutdoorTemp', 'RelHumidity'], datetime.datetime(2014, 01, 01, 0,0,0), datetime.datetime(2014, 01, 31, 23,59,59) )
+ds.aggregation('Max', ['OutdoorTemp', 'RelHumidity'], datetime.datetime(2014, 01, 01, 0,0,0), datetime.datetime(2014, 01, 31, 23,59,59) )
 print '###Aggregation: Max of OutdoorTemp and RelHumidity in January 2014'
 # Print type data structure
 print 'Datatyp:', type(ds.tables[2].df)	

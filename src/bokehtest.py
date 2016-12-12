@@ -27,31 +27,6 @@ def callback():
     i = i + 1
 
 
-# Create new DataSource
-ds = DataSource()
-
-# Read Dustdata from disc
-ds.readData('data/100.csv', True)
-ds.projection(ds.base_data.attribute_names[1], ds.base_data.attribute_names[2])
-
-df = ds.tables[0].df
-
-
-N = ds.tables[0].df
-x = df.ix[:,0]
-y = df.ix[:,1]
-
-
-#TOOLS="hover,crosshair,pan,wheel_zoom,zoom_in,zoom_out,box_zoom,undo,redo,reset,tap,save,box_select,poly_select,lasso_select,"
-
-TOOLS="hover,pan,wheel_zoom,zoom_in,zoom_out,box_zoom,undo,redo,reset,tap,save,box_select"
-
-p = figure(tools=TOOLS)
-
-p.scatter(x, y, fill_alpha=0.6,
-          line_color=None)
-p.xaxis[0].axis_label = ds.base_data.attribute_names[1]
-p.yaxis[0].axis_label = ds.base_data.attribute_names[2]
 
 #output_file("color_scatter.html", title="color_scatter.py example")
 

@@ -7,6 +7,7 @@ class DataSource:
 	# Constructor for DataSource
 	def __init__(self):
 		self.table_count = 0
+		self.table_last_aggregation = None
 		self.done = True
 		# Tables: List of Calculated data
 		self.tables = []
@@ -14,7 +15,7 @@ class DataSource:
 		self.base_data = None 
 		
 
-	def readData(self, data, is_file_on_disk):
+	def readData(self, data, is_file_on_disk, is_projection = False):
 		# Read data into table
 
 		# Set done to false since we start working
@@ -29,6 +30,10 @@ class DataSource:
 		else:
 			# else: calculated data
 			self.tables.append(data)
+			
+			if is_projection:
+				self.table_last_aggregation = self.table_count
+
 			# Increase table count 
 			self.table_count+= 1
 			
@@ -71,6 +76,7 @@ class DataSource:
 			temp_data = data[data[attribute_name] <= const1]
 
 		elif operator == 'span':
+			print 123
 			temp_data = data[(data[attribute_name] >= const1) & (data[attribute_name] <= const2)] 
 		else:
 			temp_data = None
@@ -91,14 +97,14 @@ class DataSource:
 			data = self.base_data.df
 		
 		# Choose selected columns
-		temp_data = data[[column_name1, column_name2]]
+		temp_data = data[[column_name1, column_name2, 'MasterTime']]
 
 		# Write temp_data to table 
-		self.readData(temp_data, False)
+		self.readData(temp_data, False, is_projection = True)
 
 		return temp_data
 
-	def aggregation(self, agg_function, attribute_names, range1 = None, range2 = None, data = None):
+	def aggregation(self, agg_function, attribute_names, range1 = None, range2 = None, write_table = True, data = None):
 		# Aggregate data
 
 		# If no data is explicitely passed use base data
@@ -122,5 +128,9 @@ class DataSource:
 			pass
 			#error
 
+		# Only write to table if wanted
+		if write_table:
+			self.readData(temp_data, is_file_on_disk =  False)
 		# Write result to table
-		self.readData(temp_data, False)
+		#self.readData(temp_data, False)
+		return temp_data

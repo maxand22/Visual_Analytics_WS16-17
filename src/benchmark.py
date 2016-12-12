@@ -57,7 +57,7 @@ def createTestCsv(testcases):
 	writer.writerow(['MasterTime', 'Small', 'Large', 'RelHumidity', 'OutdoorTemp'])
 	for i in range(0,testcases): 
 		# Generate random values for each column
-		master_time = randomDate(datetime.datetime(2010, 01, 01, 0,0,0),datetime.datetime(2016, 12, 31, 0,0,0))
+		master_time = randomDate(datetime.datetime(2010, 01, 01, 0,0,0),datetime.datetime(2010, 03, 31, 0,0,0))
 		small = randint(0,100000)
 		large = randint(0,100000)
 		rel_humidity = uniform(0.0, 100.0)
@@ -183,6 +183,6 @@ def profile(testcases, force_new_file = False):
 #profile(10000000, force_new_file = False)
 #profile(100000000, force_new_file = False)
 
-createTestCsv(100);
+createTestCsv(1000);
 
 

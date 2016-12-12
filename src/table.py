@@ -16,6 +16,10 @@ class Table():
 			# therefore needs to be specified
 			parse_dates = ['MasterTime']
 			self.df = pandas.read_csv(data,sep =';', header = 0, dtype=dtypes, parse_dates=parse_dates)
+
+			#self.df = self.df.set_index('MasterTime')
+			#self.df['MasterTime'] = self.df.index.values
+			#print self.df
 		else:
 			# else: data is loaded from dataframe
 			self.df = data
